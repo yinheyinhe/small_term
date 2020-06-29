@@ -1,5 +1,5 @@
-1.方案一网页拖拽上传，成功概率较低，推荐更换多种浏览器尝试，Chrome和Microsoft Edge据说成功率较高
-2.方案二（推荐）代码直接在create new file当中编辑使用
-3.方案三 本地Git bash 上传，具体教程：https://www.cnblogs.com/hankleo/p/9220295.html
-  仓库地址https://github.com/yinheyinhe/small_term.git
-  查看仓库地址教程：https://www.cnblogs.com/shiy/p/6493369.html
+//1.方案一网页拖拽上传，成功概率较低，推荐更换多种浏览器尝试，Chrome和Microsoft Edge据说成功率较高
+//2.方案二（推荐）代码直接在create new file当中编辑使用
+//3.方案三 本地Git bash 上传，具体教程：https://www.cnblogs.com/hankleo/p/9220295.html
+  //仓库地址https://github.com/yinheyinhe/small_term.git
+  //查看仓库地址教程：https://www.cnblogs.com/shiy/p/6493369.html
