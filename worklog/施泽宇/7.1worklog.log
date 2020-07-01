@@ -37,7 +37,7 @@ pip暴力强行下载失败
 重新考虑尝试anaconda
 conda install Keras失败
 最后发现anaconda的python环境是2.7，不满足Keras最低要求3.0
-18：00-19：00
+18：00-20：00
 重装anaconda
 在jupyter notebook上运行
 再次报错
