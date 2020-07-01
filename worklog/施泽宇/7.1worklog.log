@@ -25,5 +25,22 @@ pycharm运行plot等包经常报错，python语法存在不规范问题
 方法失败
 16：00-16：15
 和组员重新讨论方法和模型细节
-16：15
+16：15-18：00
 继续开发
+尝试使用SARIMA模型
+pycharm运行报错
+存在大量不兼容包
+更换方案
+尝试使用rnn模型
+pycharm运行导入的Keras包报错
+pip暴力强行下载失败
+重新考虑尝试anaconda
+conda install Keras失败
+最后发现anaconda的python环境是2.7，不满足Keras最低要求3.0
+18：00-19：00
+重装anaconda
+在jupyter notebook上运行
+再次报错
+缺少Keras的封装包
+安装封装包
+运行成功，开始系统性的调试和细节化的调整
