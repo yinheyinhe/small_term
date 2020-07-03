@@ -44,3 +44,20 @@
          学习和熟悉Myeclipse的使用以及Java的HTTP请求及怎样在Java中调用Python的微
          服务接口程序以获取天气预测数据
 
+7.2 
+         9:00~11:00
+         继续学习Java的HTTP请求及调用Python接口程序。但由于由于Python方面还无法完成接口
+         所以在学习过后暂时跳过此部分，待Python接口程序完成，在实现Java调用
+
+         11:00~12:00
+         了解学习使用spring MVC 创建一个用户登录界面
+
+         14:00~18:00
+         在网上下载了一个spring MVC程序，想通过程序运行来继续深入学习。但由于自己安装的tomcat
+         与Myeclipse自带的tomcat发生冲突。导致8080端口一直被占用。尝试网上教程，杀死端口为8080
+         的进程，关闭Myeclipse的tomcat，改变自己配置的tomcat的连接端口，和重新配置tomcat。但程序
+        始终无法成功运行。
+
+       18:00以后
+        继续研究tomcat部署web project项目时出现的端口被占用问题。
+
