@@ -4,6 +4,7 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
 from statsmodels.graphics.api import qqplot
+from model import ProcessData
 
 data = pd.read_csv('maxmin.csv', parse_dates=['date'])
 dta = data['tmin']
@@ -38,10 +39,10 @@ fig = sm.graphics.tsa.plot_pacf(dta,lags=30,ax=ax2)
 plt.show()
 
 # 使用ARMA模型
-arima_mod32 = sm.tsa.ARMA(dta,(3,2)).fit()
-print(arima_mod32.aic,arima_mod32.bic,arima_mod32.hqic)
+arma_mod32 = sm.tsa.ARMA(dta,(4,2)).fit()
+print(arma_mod32.aic,arma_mod32.bic,arma_mod32.hqic)
 
-resid = arima_mod76.resid
+resid = arma_mod32.resid
 fig = plt.figure(figsize=(12,8))
 ax1 = fig.add_subplot(211)
 fig = sm.graphics.tsa.plot_acf(resid.values.squeeze(),lags=30,ax=ax1)
@@ -53,12 +54,13 @@ fig = plt.figure(figsize=(12,8))
 ax = fig.add_subplot(111)
 fig = qqplot(resid,line='q',ax=ax,fit=True)
 plt.show()
-
 '''
 # 生成预测数据
 # 未来10年同一天
 predict_year = 10
 predict_end_year = end_year.values[0]+predict_year
-predict_data = arima_mod76.predict(str(end_year.values[0]),str(predict_end_year),dynamic = True)
+predict_data = arma_mod32.predict(str(end_year.values[0]),str(predict_end_year),dynamic = True)
 print(predict_data)
 '''
+p = ProcessData(data,10,'min')
+p.process_minmax()
