@@ -1,0 +1,22 @@
+import socket,os,threading
+
+#send the file to the client
+class SendFile():
+    def __init__(self,serverAdd='127.0.0.1',serverPort=9000,fileName=""):
+        self.address=(serverAdd,serverPort)
+        self.filename=fileName
+
+    def run(self):
+        print("file name is =="+self.file.name)
+        BUFFERSIZE=1024
+        cout=0
+        while True:
+            file_data=self.file.read(BUFFERSIZE)
+            if not file_data:
+                print("no data find")
+                break
+            self.sock.send(file_data)
+
+        print("sent file ok")
+        self.file.close()
+        self.sock.close()
