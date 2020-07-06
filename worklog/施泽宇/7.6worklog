@@ -18,3 +18,10 @@
 研究Tomcat
 失败，没找到原因
 研究spring boot
+20：30-22：00
+研究Tomcat
+启动startup.bat是一堆乱码
+将enconding改成GBK
+发现是8080端口被占用
+尝试taskkill失败
+重装之后失败
