@@ -79,7 +79,7 @@ next(data)
 seq = re.compile(":")
 result = []
 for e in data:
-    lst = e.split(' ')
+    lst = e.split()
     item = {
         "date": lst[1],
         "t_average": lst[2],
