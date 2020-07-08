@@ -54,7 +54,7 @@ model.fit(df);
 
 # 构建待预测日期数据框，periods = 365 代表除历史数据的日期外再往后推 365 天
 
-future = model.make_future_dataframe(periods=0)
+future = model.make_future_dataframe(periods=90)
 # df.shape[0]-trainsize
 
 print("-----------------future.tail-----------------")
@@ -87,8 +87,11 @@ for e in data:
         "t_max": lst[4]
     }
     result.append(item)
+result={"data":result}
 print(type(result))
+
 with open('data.json', 'w') as dump_f:
+    
     json.dump(result, dump_f)
 # 展示预测结果
 
