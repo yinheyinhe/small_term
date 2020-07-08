@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="mvc.spring.controller.LoginController"%>
+<% 
+    LoginController controller=new LoginController();
+	String user=controller.user2;
+	String pass=controller.pass2; 
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -52,28 +58,57 @@ body {
 <br /><br /><br />
 
 <div class="footer">
-<h2>注册</h2>
-<form action="register" method="post">
+<h2>register</h2>
+
+    <td><input type="hidden" value="<%=user%>" name="user" id="user"/></td>
+    <td><input type="hidden" value="<%=pass%>" name="pass" id="pass"/></td>
 <table width="400" border="0" class="center loginbox">
   <tr>
-    <td>用户名：</td>
-    <td><input type="text" name="username" class="in1" required="required"/></td>
+    <td>User:</td>
+    <td><input type="text"  id="username" value="" class="in1" required="required"/></td>
 
   </tr>
   <tr>
-    <td>密码：</td>
-    <td><input type="password" name="password" class="in1" required="required"/><br />
+    <td>Password:</td>
+    <td><input type="password"  id="password" value="" class="in1" required="required"/><br />
 <br />
 </td>
   </tr>
   
 <tr>
-    <td><a href="login.jsp">去登录</a></td>
-    <td><input type="submit" value="注 册" name="type" />&nbsp;&nbsp;<input type="reset" value="重 置" /></td>
+    
+    <td><a href="login.jsp">login</a></td>
+    <td><input type="submit" id="register" value="register" name="type" />&nbsp;&nbsp;<input type="reset" id="reset" value="reset" /></td>
   </tr>
 </table>
-</form>
+
 
 </div>
 </body>
+
+<script>
+
+    
+	document.getElementById('register').addEventListener('click',function()
+	{
+	    var user = document.getElementById("user").value
+	    var pass = document.getElementById("pass").value
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+		if(username == user && password == pass)
+		{
+			window.location.href = "registerSuccess.jsp";
+		}
+		else
+	    {
+			window.location.href = "registerError.jsp";
+		}
+	});
+	document.getElementById('reset').addEventListener('click',function()
+	{
+		document.getElementById("username").value="";
+		document.getElementById("password").value="";
+		
+	});
+</script>
 </html>

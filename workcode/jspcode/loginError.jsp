@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${message} <a href="login.jsp">重新登录</a>
+    <a href="login.jsp">重新登录</a>
 </body>
 </html>
