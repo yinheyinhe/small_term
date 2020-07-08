@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt                  # plots
 import statsmodels.tsa.api as smt
 import statsmodels.api as sm
 from itertools import product                    # some useful functions
+import warnings                                  # do not disturbe mode
+warnings.filterwarnings('ignore')
 
 # MAPE
 def mean_absolute_percentage_error(y_true, y_pred):
@@ -48,25 +50,26 @@ plt.show()
 
 # The seasonal difference
 tem_diff = tem.TMAX - tem.TMAX.shift(1)
-tsplot(tem_diff[180+1:], lags=60)
+tsplot(tem_diff[24+1:], lags=60)
 plt.show()
 
 # setting initial values and some bounds for them
-ps = range(2, 5)
-d=1
-qs = range(2, 5)
+ps = range(0, 5)
+ds = range(0,2)
+qs = range(0, 5)
 Ps = range(0, 2)
-D=1
-Qs = range(0, 2)
-s = 180
+Ds = range(0,2)
+Q = 1
+s = 22
 
 # creating list with all the possible combinations of parameters
-parameters = product(ps, qs, Ps, Qs)
-parameters_list = list(parameters)
-len(parameters_list)  # 36
+param = product(ps,ds, qs, Ps,Ds)
+parameters_list = list(param)
+print('parameters_list:{}'.format(parameters_list))
+print(len(parameters_list))  # 36
 
 
-def optimizeSARIMA(parameters_list, d, D, s):
+def optimizeSARIMA(parameters_list,Q,s):
     """Return dataframe with parameters and corresponding AIC
 
         parameters_list - list with (p, q, P, Q) tuples
@@ -78,20 +81,20 @@ def optimizeSARIMA(parameters_list, d, D, s):
     results = []
     best_aic = float("inf")
 
-    for parameters in parameters_list:
+    for param in parameters_list:
         # we need try-except because on some combinations model fails to converge
         try:
-            model = sm.tsa.statespace.SARIMAX(tem.TMAX, order=(parameters[0], d, parameters[1]),
-                                              seasonal_order=(parameters[2], D, parameters[3], s)).fit(disp=-1)
+            model = sm.tsa.statespace.SARIMAX(tem.TMAX, order=(param[0], param[1], param[2]),
+                                              seasonal_order=(param[3], param[4], Q, s)).fit(disp=-1)
         except:
             continue
         aic = model.aic
-        # saving best model, AIC and parameters
+        # saving best model, AIC and parameterss
         if aic < best_aic:
             best_model = model
             best_aic = aic
-            best_param = parameters
-        results.append([parameters, model.aic])
+            best_param = param
+        results.append([param, model.aic])
 
     result_table = pd.DataFrame(results)
     result_table.columns = ['parameters', 'aic']
@@ -101,17 +104,21 @@ def optimizeSARIMA(parameters_list, d, D, s):
     return result_table
 
 warnings.filterwarnings("ignore")
-result_table = optimizeSARIMA(parameters_list, d, D, s)
+result_table = optimizeSARIMA(parameters_list,Q,s)
+print(result_table)
 
 # set the parameters that give the lowest AIC
-p, q, P, Q = result_table.parameters[0]
+p,d, q, P,D = result_table.parameters[0]
 
 best_model=sm.tsa.statespace.SARIMAX(tem.TMAX, order=(p, d, q),
-                                        seasonal_order=(P, D, Q, s)).fit(disp=-1)
+                                     seasonal_order=(P, D, Q, s),
+                                     enforce_stationarity=False,
+                                     enforce_invertibility=False).fit(disp=-1)
+
 print(best_model.summary())
 
-tsplot(best_model.resid[180+1:], lags=60)
-plt.show()
+#tsplot(best_model.resid[24+1:], lags=60)
+#plt.show()
 
 
 def plotSARIMA(series, model, n_steps):
@@ -124,7 +131,7 @@ def plotSARIMA(series, model, n_steps):
 
     # adding model values
     data = series.copy()
-    data.columns = ['actual']
+    data.columns = ['daily','actual']
     data['sarima_model'] = model.fittedvalues
     # making a shift on s+d steps, because these values were unobserved by the model
     # due to the differentiating
