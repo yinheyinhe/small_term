@@ -1,0 +1,18 @@
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.File;
+import java.io.IOException;
+public class MainApplication
+{
+    public static void main(String args[]) throws IOException
+    {
+        File file = new File("F:/data.json");
+        String content = FileUtils.readFileToString(file, "UTF-8");
+        JSONObject jsonObject = new JSONObject(content);
+        System.out.println("日期是：" + jsonObject.getString("date"));
+        System.out.println("预测温度：" + jsonObject.getDouble("t_average"));
+        System.out.println("最高范围：" + jsonObject.getDouble("t_max"));
+        System.out.println("最低范围：" + jsonObject.getDouble("t_min"));
+    }
+}
