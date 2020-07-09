@@ -1,0 +1,4 @@
+致力于修改python中send不能传输变量问题（尚未解决，还在努力中）
+python与Java交互过后无法第二次传输数据
+python和Java交互过后文件传输会出现数据错位问题
+python和java传输文件之后无法传输文件问题
