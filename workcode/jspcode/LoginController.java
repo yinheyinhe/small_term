@@ -1,23 +1,49 @@
 package mvc.spring.controller;
 
-/*import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;*/
+import java.io.IOException;
 
-//@Controller 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-public class LoginController {
-	//public String user1 ;
-	public String user2 ="user123";
-	//public String pass1 ;
-	public String pass2 ="pass123";
+
+public class LoginController extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public String pattern;
+	public String username;
+	public String password;
+
+	public String flag;
+	public String imgname;
+	public String json;
 	
-	//@RequestMapping("/login")  
-	 /*public void login(String username,String password) { 
 	
-	    user1=username;
-	    pass1=password;
-	}*/
 	
+	public void setUsername(String username)
+	{
+		this.username=username;
+	}
+	
+	public void setPassword(String password)
+	{
+		this.password=password;
+	}
+	
+	public String getUsername() { return username; } 
+	
+	public String getPassword(){ return password; }
+	
+	public void setFlag() {
+		if(username == "user123" && password == "pass123")
+			flag = "1";
+		else
+			flag = "0";
+		
+	}
+	
+	public String getFlag() {return flag;}
 }

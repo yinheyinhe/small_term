@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@page import="mvc.spring.controller.LoginController"%>
 <% 
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     LoginController controller=new LoginController();
-	String user=controller.user2;
-	String pass=controller.pass2; 
+	String flag=controller.flag;
+	
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -60,8 +62,8 @@ body {
 <div class="footer">
 <h2>register</h2>
 
-    <td><input type="hidden" value="<%=user%>" name="user" id="user"/></td>
-    <td><input type="hidden" value="<%=pass%>" name="pass" id="pass"/></td>
+    <td><input type="hidden" value="<%=flag%>" name="flag" id="flag"/></td>
+    
 <table width="400" border="0" class="center loginbox">
   <tr>
     <td>User:</td>
@@ -91,11 +93,11 @@ body {
     
 	document.getElementById('register').addEventListener('click',function()
 	{
-	    var user = document.getElementById("user").value
-	    var pass = document.getElementById("pass").value
+	    var flag = document.getElementById("flag").value
+	    
 		var username = document.getElementById("username").value;
 		var password = document.getElementById("password").value;
-		if(username == user && password == pass)
+		if(flag == '1')
 		{
 			window.location.href = "registerSuccess.jsp";
 		}

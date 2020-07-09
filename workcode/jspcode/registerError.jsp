@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${message} <a href="register.jsp">重新注册</a>
+ <a href="register.jsp">重新注册</a>
 </body>
 </html>

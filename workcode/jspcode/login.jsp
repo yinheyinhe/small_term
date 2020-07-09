@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="mvc.spring.controller.LoginController" %>
 <%
-    LoginController controller = new LoginController();
+    
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    String user = controller.user2;
-    String pass = controller.pass2;
+   
+    
 %>
     
     
@@ -65,17 +65,17 @@ body {
 <div class="footer">
 <h2>登录</h2>
 
-    <td><input type="hidden" value="<%=user%>" name="user" id="user"/></td>
-    <td><input type="hidden" value="<%=pass%>" name="pass" id="pass"/></td>
+    
+<form action="LoginController.java" method="post" onsubmit="return submit()">
 <table width="400" border="0" class="center loginbox">
   <tr>
     <td>User:</td>
-    <td><input type="text" id="username" value="" class="in1" required="required"/></td>
+    <td><input type="text" id="username" name="username" value="" class="in1" required="required"/></td>
 
   </tr>
   <tr>
     <td>Password:</td>
-	<td><input type="password" id="password" value=""  class="in1" required="required"/><br />
+	<td><input type="password" id="password" name="password" value=""  class="in1" required="required"/><br />
 <br />
 </td>
   </tr>
@@ -86,20 +86,36 @@ body {
     <td><input type="submit" id="login" value="login" name="type" />&nbsp;&nbsp;<input type="reset" id="reset" value="reset" /></td>
   </tr>
 </table>
+</form>
+
+<script>
+
+    function submit(){
+	    return true;
+	}
+</script>
+<%
+     LoginController controller = new LoginController();
+     String flag = controller.getFlag();
+     
+ %>
+<td><input type="hidden" value="<%=flag%>" name="flag" id="flag"/></td>
 
 
 </div>
 </body>
+
+
 <script>
 
-    
+  
 	document.getElementById('login').addEventListener('click',function()
 	{
-	    var user = document.getElementById("user").value
-	    var pass = document.getElementById("pass").value
-		var username = document.getElementById("username").value;
-		var password = document.getElementById("password").value;
-		if(username == user && password == pass)
+	    
+	    var flag = document.getElementById("flag").value
+	    
+		
+		if(flag == '1')
 		{
 			window.location.href = "loginSuccess.jsp";
 		}
@@ -114,6 +130,8 @@ body {
 		document.getElementById("password").value="";
 		
 	});
+	
+	
 </script>
 
 </html>

@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ page import="mvc.spring.controller.LoginController" %>
 <%
-    LoginController controller = new LoginController();
+    
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    String user = controller.user1;
-    String pass = controller.pass1;
-    System.out.print(user);
+   
+    
 %>
+    
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -27,6 +27,6 @@
   </head>
   
   <body>
-    <br>
+    
   </body>
 </html>
