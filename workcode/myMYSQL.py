@@ -22,6 +22,8 @@ class MyUserSql:
 
         try:
             cursor.execute(sql)
+            data = cursor.fetchall()
+            print(data)
             db.commit()
         except:
             db.rollback()
@@ -45,38 +47,56 @@ class MyUserSql:
 
     #增加一名用户
     def insertUser(self,username,password):
-        db = pymysql.connect("localhost", "root", "sd204314", "myusers")
+        db = pymysql.connect(self.host, self.user, self.password, self.database)
 
         cursor = db.cursor()
 
         sql = 'INSERT INTO user VALUES("%s","%s")' %(username,password)
 
         try:
-            if cursor.execute(sql):
-                return 1
-            else:
-                return 0
+            cursor.execute(sql)
             db.commit()
+            return 1
         except:
+            return 0
             db.rollback()
 
         db.close()
 
     #删除一名用户
     def deleteUser(self,username):
-        db = pymysql.connect("localhost", "root", "sd204314", "myusers")
+        db = pymysql.connect(self.host, self.user, self.password, self.database)
 
         cursor = db.cursor()
 
         sql = 'DELETE FROM user WHERE name="%s"' %username
 
         try:
-            if cursor.execute(sql):
-                return 1
-            else:
-                return 0
+            cursor.execute(sql)
             db.commit()
+            return 1
         except:
+            return 0
             db.rollback()
 
         db.close()
+
+    #修改指定用户的信息
+    def changeUser(self,username,nusername,npassword):
+        db = pymysql.connect(self.host, self.user, self.password, self.database)
+
+        cursor = db.cursor()
+
+        sql = 'UPDATE user SET name="%s", password="%s" WHERE name="%s"' %(nusername,npassword,username)
+
+        try:
+            cursor.execute(sql)
+            db.commit()
+            return 1
+        except:
+            return 0
+            db.rollback()
+
+        db.close()
+
+
