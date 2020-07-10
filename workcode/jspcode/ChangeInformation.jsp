@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登录页面</title>
+<title>修改信息页面</title>
 <style>
 * {
 	margin: 0;
@@ -61,10 +61,10 @@ body {
 <br /><br /><br />
 
 <div class="footer">
-<h2>登录</h2>
+<h2>修改</h2>
 
     
-<form action="loginprocess.jsp" method="post" onsubmit="return submit()">
+<form action="changeprocess.jsp" method="post" onsubmit="return submit()">
 <table width="400" border="0" class="center loginbox">
   <tr>
     <td>User:</td>
@@ -78,8 +78,6 @@ body {
 </td>
   </tr>
 <tr>
-    
-	<td><a href="register.jsp">register</a></td>
 	
     <td><input type="submit" id="login" value="login" name="type" />&nbsp;&nbsp;<input type="reset" id="reset" value="reset" /></td>
   </tr>

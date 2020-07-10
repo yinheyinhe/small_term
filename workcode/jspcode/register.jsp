@@ -4,9 +4,7 @@
 <% 
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    LoginController controller=new LoginController();
-	String flag=controller.flag;
-	
+   
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -62,8 +60,7 @@ body {
 <div class="footer">
 <h2>register</h2>
 
-    <td><input type="hidden" value="<%=flag%>" name="flag" id="flag"/></td>
-    
+<form action="registerprocess.jsp" method="post" onsubmit="return submit()">  
 <table width="400" border="0" class="center loginbox">
   <tr>
     <td>User:</td>
@@ -83,7 +80,12 @@ body {
     <td><input type="submit" id="register" value="register" name="type" />&nbsp;&nbsp;<input type="reset" id="reset" value="reset" /></td>
   </tr>
 </table>
-
+</form>
+<script>
+    function submit(){
+        return true;
+    }
+</script>
 
 </div>
 </body>
@@ -91,21 +93,7 @@ body {
 <script>
 
     
-	document.getElementById('register').addEventListener('click',function()
-	{
-	    var flag = document.getElementById("flag").value
-	    
-		var username = document.getElementById("username").value;
-		var password = document.getElementById("password").value;
-		if(flag == '1')
-		{
-			window.location.href = "registerSuccess.jsp";
-		}
-		else
-	    {
-			window.location.href = "registerError.jsp";
-		}
-	});
+	
 	document.getElementById('reset').addEventListener('click',function()
 	{
 		document.getElementById("username").value="";

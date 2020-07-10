@@ -37,13 +37,11 @@ public class LoginController extends HttpServlet{
 	
 	public String getPassword(){ return password; }
 	
-	public void setFlag() {
-		if(username == "user123" && password == "pass123")
-			flag = "1";
-		else
-			flag = "0";
+	public String setFlag(String Username,String Password) {
 		
+		
+		return flag;
 	}
 	
-	public String getFlag() {return flag;}
+	
 }
