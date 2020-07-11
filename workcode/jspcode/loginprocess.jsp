@@ -1,5 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-<%@ page import="mvc.spring.controller.LoginController" %>
+<%@ page import="mvc.spring.controller.SocketClient" %>
+<%@ page import="org.json.JSONException"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,25 +28,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
   <body>
       <%
-     String loginName=request.getParameter("username");
-    String loginPass=request.getParameter("password");
-    LoginController controller = new LoginController();
-    controller.setUsername(loginName);
-    controller.setPassword(loginPass);
-    String flag =controller.setFlag(loginName, loginPass);   
-    
-    
-    if(flag=="1")
-    {
-        session.setAttribute("loginName", loginName);
-        session.setAttribute("loginPass", loginPass);
-        response.sendRedirect(request.getContextPath()+"/loginSuccess.jsp");
+     //String loginName=request.getParameter("username");
+     //String loginPass=request.getParameter("password");
+     //String Codetext=request.getParameter("code");
+     //String Codeborn=(String)session.getAttribute("code");
+     SocketClient client = new SocketClient();
+     boolean flag1 = true; //client.Sign(loginName, loginPass);
+     JSONObject json = client.readjson();
+     if(flag1)
+     {
+     session.setAttribute("json",json);
+     response.sendRedirect(request.getContextPath()+"/loginSuccess.jsp");   
+     }
+     else
+     {
+     response.sendRedirect(request.getContextPath()+"/loginError.jsp");
+     }
+     
+     //session.setAttribute("json",json);
+     //session.setAttribute("loginName", loginName);
+     //session.setAttribute("loginPass", loginPass);
+     //response.sendRedirect(request.getContextPath()+"/loginSuccess.jsp");   
+     //if(Codetext == Codeborn)
+     /*{
+        if(flag1)
+        {
+	        JSONObject json = client.readjson();
+	        session.setAttribute("json",json);
+	        session.setAttribute("loginName", loginName);
+	        session.setAttribute("loginPass", loginPass);
+	        response.sendRedirect(request.getContextPath()+"/loginSuccess.jsp");
         }
-    else if(flag=="0")
-    {
-        
-        response.sendRedirect(request.getContextPath()+"/loginError.jsp");
-        }
+	    else if(!flag1)
+	    {
+	        response.sendRedirect(request.getContextPath()+"/loginError.jsp");
+	     }
+	 }
+     
+     else
+     {
+         response.sendRedirect(request.getContextPath()+"/login.jsp");
+     }*/
    %>
   
   </body>

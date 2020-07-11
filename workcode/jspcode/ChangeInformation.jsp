@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mvc.spring.controller.LoginController" %>
+
 <% 
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -78,7 +78,7 @@ body {
 </td>
   </tr>
 <tr>
-	
+	<td><a href="Information.jsp">Go back</a></td>
     <td><input type="submit" id="login" value="login" name="type" />&nbsp;&nbsp;<input type="reset" id="reset" value="reset" /></td>
   </tr>
 </table>

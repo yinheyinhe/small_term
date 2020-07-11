@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-<%@ page import="mvc.spring.controller.LoginController" %>
+<%@ page import="mvc.spring.controller.SocketClient" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,19 +29,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     String newPass=request.getParameter("password");
     String loginName = (String)session.getAttribute("loginName");
     String loginPass = (String)session.getAttribute("loginPass");
-    LoginController controller = new LoginController();
-    controller.setUsername(loginName);
-    controller.setPassword(loginPass);
-    String flag =controller.setFlag(loginName, loginPass);   
+    SocketClient client = new SocketClient();
     
+    boolean flag1 =client.Change(loginName, loginPass);   
+    boolean flag2;
+     
+     if(newName == loginName && newPass == loginPass)
+         flag2 = true;
+     else
+         flag2 = false;
     
-    if(flag=="1")
+    if(flag1 && flag2)
     {
         session.setAttribute("loginName", loginName);
         session.setAttribute("loginPass", loginPass);
         response.sendRedirect(request.getContextPath()+"/changeSuccess.jsp");
         }
-    else if(flag=="0")
+    else 
     {
         
         response.sendRedirect(request.getContextPath()+"/changeError.jsp");

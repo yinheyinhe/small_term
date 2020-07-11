@@ -1,4 +1,4 @@
-package test;
+package mvc.spring.controller;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -12,14 +12,16 @@ import javax.imageio.ImageIO;
 
 
 public class VerifyCodeServlet{
-	public void doGet() {
-		int width = 45;
-		int height = 20;
+	public BufferedImage image;
+	public String code;
+	public VerifyCodeServlet() {
+		int width = 20;
+		int height = 10;
 		
-		BufferedImage image = new BufferedImage(45,20,BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(20,10,BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = image.createGraphics();
 		
-		//ÉèÖÃÏà¹ØÑÕÉ«µÈµÈ
+		//è®¾ç½®ç›¸å…³é¢œè‰²ç­‰ç­‰
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 		
@@ -27,13 +29,13 @@ public class VerifyCodeServlet{
 		g.drawRect(0,0,width-1,height-1);
 
 			
-		//¶¨ÒåÉú³ÉËæ»úÊıµÄ¶ÔÏó
+		//å®šä¹‰ç”Ÿæˆéšæœºæ•°çš„å¯¹è±¡
 		Random random = new Random();
-		//Ã¿¸ö×Ö·ûÕ¼¾İµÄ¿í¶È
+		//æ¯ä¸ªå­—ç¬¦å æ®çš„å®½åº¦
 		int x = 10;
 		int y = 16;
 		    
-		StringBuffer str_random = new StringBuffer();//¶¨Òå³É»º³å×Ö·ûÀàĞÍÊÇÎªÁËÌá¸ßĞ§ÂÊ
+		StringBuffer str_random = new StringBuffer();//å®šä¹‰æˆç¼“å†²å­—ç¬¦ç±»å‹æ˜¯ä¸ºäº†æé«˜æ•ˆç‡
 		    
 		char[] codeSets = {
 		    	'a','b','c','d','e','f','g','h','i','j','k','l','m',
@@ -43,10 +45,10 @@ public class VerifyCodeServlet{
 		    	'0','1','2','3','4','5','6','7','8','9'		
 		};
 		    
-		//²úÉúËæ»úÊı
-		//¶¨ÒåËæ»úÊıµÄ¸öÊı
+		//äº§ç”Ÿéšæœºæ•°
+		//å®šä¹‰éšæœºæ•°çš„ä¸ªæ•°
 		int length = 4;
-		//¶¨Òå ±äÁ¿´æ´¢Ëæ»úÊı×Ö±äÁ¿
+		//å®šä¹‰ å˜é‡å­˜å‚¨éšæœºæ•°å­—å˜é‡
 
 		for(int i=0;i<length;i++){
 			String code = String.valueOf(codeSets[random.nextInt(codeSets.length)]);
@@ -62,32 +64,49 @@ public class VerifyCodeServlet{
 			g.drawString(code, i * x + 1, y);
 			str_random.append(code);
 		}
-		    
-		request.getSession().setAttribute("codess",str_random.toString());
+		    code = str_random.toString();
+		//request.getSession().setAttribute("codess",str_random.toString());
 		    		    
-		//²úÉú¸ÉÈÅÏß
+		//äº§ç”Ÿå¹²æ‰°çº¿
 		for(int i=0;i<50;i++){
-		    //ÉèÖÃ40Ìõ¸ÉÈÅµã
+		    //è®¾ç½®40æ¡å¹²æ‰°ç‚¹
 			int red = random.nextInt(255);
 		    int green = random.nextInt(255);
 		    int blue = random.nextInt(255);
 		    g.setColor(new Color(red,green,blue));
-		    g.drawOval(random.nextInt(45), random.nextInt(20), 1, 1);
+		    g.drawOval(random.nextInt(20), random.nextInt(10), 1, 1);
 		}
 		
-		response.setContentType("image/jpeg");
-	    response.setHeader("Pragam","no-cache");
-	    response.setHeader("Cache-Control","no-cache");
-	    response.setDateHeader("Expires",0);
+		//response.setContentType("image/jpeg");
+	    //response.setHeader("Pragam","no-cache");
+	    //response.setHeader("Cache-Control","no-cache");
+	    //response.setDateHeader("Expires",0);
 	    
-	    ServletOutputStream outputstream = response.getOutputStream();
-	    ImageIO.write(image, "jpeg", outputstream);
+	    //ServletOutputStream outputstream = response.getOutputStream();
+	    //ImageIO.write(image, "jpeg", outputstream);
 		    
 		    
-	    image.flush();//Ë¢ĞÂÓëÍ¼Ïñ»º³åÓĞ¹ØµÄÊı¾İ
-	    g.dispose();//ÊÍ·ÅÓëGraphice2DÓĞ¹ØµÄ¶ÔÏóµÄ×ÊÔ´
-	    out.flush();
-	    out.close();
-		    
+	    image.flush();//åˆ·æ–°ä¸å›¾åƒç¼“å†²æœ‰å…³çš„æ•°æ®
+	    g.dispose();//é‡Šæ”¾ä¸Graphice2Dæœ‰å…³çš„å¯¹è±¡çš„èµ„æº
+	    //out.flush();
+	    //out.close();
+		
 	}
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	public BufferedImage getBufferedImage() {
+		return image;
+	}
+
+	public void setBufferedImage(BufferedImage image) {
+		this.image = image;
+	}
+
+
 }

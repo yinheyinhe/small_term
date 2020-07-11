@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'loginprocess.jsp' starting page</title>
+    <title>My JSP 'logoutprocess.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,27 +22,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-         
+  
   <body>
-      <%
-     String loginName=(String)request.getParameter("username");
-    String loginPass=(String)request.getParameter("password");
-    SocketClient client = new SocketClient();
-    
-    boolean flag = client.Registe(loginName, loginPass);   
-    session.setAttribute("loginName", loginName);
-    session.setAttribute("loginPass", loginPass);
-    
-    
-    if(flag)
+    <%
+     String newName=request.getParameter("username");
+     String newPass=request.getParameter("password");
+     String logoutName=(String)session.getAttribute("loginName");
+     String logoutPass=(String)session.getAttribute("loginPass");
+     SocketClient client = new SocketClient();
+     boolean flag1 =client.delete(logoutName, logoutPass);   
+     boolean flag2;
+     
+     if(newName == logoutName && newPass == logoutPass)
+         flag2 = true;
+     else
+         flag2 = false;
+     
+    if(flag1 && flag2)
     {
         
-        response.sendRedirect(request.getContextPath()+"/registerSuccess.jsp");
+        response.sendRedirect(request.getContextPath()+"/logoutSuccess.jsp");
         }
-    else if(!flag)
+    else 
     {
         
-        response.sendRedirect(request.getContextPath()+"/registerError.jsp");
+        response.sendRedirect(request.getContextPath()+"/loginoutError.jsp");
         }
    %>
   

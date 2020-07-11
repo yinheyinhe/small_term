@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="mvc.spring.controller.LoginController" %>
+<%@ page import="mvc.spring.controller.VerifyCodeServlet" %>
+<%@ page import="java.awt.image.BufferedImage" %>
 <% 
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-
+    VerifyCodeServlet Code=new VerifyCodeServlet();
+    BufferedImage image = Code.image;
+    String code = Code.code;
+   session.setAttribute("code",code);
 %>
     
     
@@ -13,6 +17,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"  content="MSHTML 6.00.2900.3059" name="GENERATOR"/>
 <title>登录页面</title>
 <style>
 * {
@@ -73,7 +78,13 @@ body {
   </tr>
   <tr>
     <td>Password:</td>
-	<td><input type="password" id="password" name="password" value=""  class="in1" required="required"/><br />
+	<td><input type="password" id="password" name="password" value=""  class="in1" required="required"/>
+  <tr>
+	<td>验证码</td>
+	<td><input type="text" name="code" value="">
+        <img src=<%=image%> id="img"></td>
+  </tr>
+	<br />
 <br />
 </td>
   </tr>

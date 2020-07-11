@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'Information.jsp' starting page</title>
+    <title>My JSP 'logoutSuccess.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -23,8 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <td><a href="loginSuccess.jsp">Return to the previous step</a></td>
-     <td><a href="ChangeInformation.jsp">Change Information</a></td>
-     <td><a href="logout.jsp">Logout</a></td>
+    <a href="logout.jsp">Log out again</a>
   </body>
 </html>
